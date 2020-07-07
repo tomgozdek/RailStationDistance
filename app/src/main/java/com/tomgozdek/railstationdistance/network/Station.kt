@@ -7,14 +7,18 @@ data class Station(
     val name : String,
     @Json(name = "name_slug")
     val nameSlug : String,
-    val latitude : Float,
-    val longitude : Float,
+    val _latitude : Float?,
+    val _longitude : Float?,
     val hits : Int,
-    val ibnr : Int,
+    val _ibnr : Int?,
     val city : String,
     val region : String,
     val country : String,
     @Json(name = "localised_name")
     @NullToEmptyString
     val localisedName : String = ""
-)
+){
+    val latitude = _latitude ?: 0F
+    val longitude = _longitude ?: 0F
+    val ibnr = _ibnr ?: 0
+}
