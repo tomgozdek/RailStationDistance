@@ -1,9 +1,10 @@
-package com.tomgozdek.railstationdistance
+package com.tomgozdek.railstationdistance.distance
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tomgozdek.railstationdistance.R
 
-class MainActivity : AppCompatActivity()
+class DistanceActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?)
     {
