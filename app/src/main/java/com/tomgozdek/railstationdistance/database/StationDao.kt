@@ -7,7 +7,7 @@ import androidx.room.Query
 @Dao
 interface StationDao {
     @Insert
-    fun insertAll(vararg stations : Station)
+    fun insertAll(stations : List<Station>)
 
     @Query("SELECT * FROM stations_table WHERE id LIKE :stationId")
     fun findById(stationId : Int) : Station

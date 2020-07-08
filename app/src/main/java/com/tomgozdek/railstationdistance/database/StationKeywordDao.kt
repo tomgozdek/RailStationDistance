@@ -7,7 +7,7 @@ import androidx.room.Query
 @Dao
 interface StationKeywordDao {
     @Insert
-    fun insertAll(vararg keywords: StationKeyword)
+    fun insertAll(keywords: List<StationKeyword>)
 
     @Query("SELECT * FROM station_keywords_table")
     fun getAll() : List<StationKeyword>
