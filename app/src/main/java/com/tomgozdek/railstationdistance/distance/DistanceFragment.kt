@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.tomgozdek.railstationdistance.R
 import com.tomgozdek.railstationdistance.database.StationDatabase
 import com.tomgozdek.railstationdistance.databinding.FragmentDistanceBinding
@@ -17,6 +18,13 @@ class DistanceFragment : Fragment(){
     private lateinit var binding : FragmentDistanceBinding
     private lateinit var viewModel: DistanceViewModel
     private lateinit var viewModelFactory: DistanceViewModelFactory
+
+    private val searchClickListener = View.OnClickListener {
+        when(it.id){
+            R.id.startStationContainer -> navigateToSearchFragment()
+            R.id.destinationStationContainer -> navigateToSearchFragment()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,8 +40,14 @@ class DistanceFragment : Fragment(){
 
         binding.viewModel = viewModel
 
+        binding.startStationContainer.setOnClickListener(searchClickListener)
+        binding.destinationStationContainer.setOnClickListener(searchClickListener)
 
 
         return binding.root
+    }
+
+    private fun navigateToSearchFragment() {
+        findNavController().navigate(DistanceFragmentDirections.actionDistanceFragmentToSearchFragment())
     }
 }
