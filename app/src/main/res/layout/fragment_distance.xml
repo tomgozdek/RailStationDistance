@@ -8,19 +8,79 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/station_one_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/distanceLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread">
+
+            <ImageView
+                android:id="@+id/station_one_image"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:scaleX="-1"
+                android:src="@drawable/railway_train"
+                android:tint="@android:color/holo_blue_dark" />
+
+            <TextView
+                android:id="@+id/station_one_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Gdańsk Oliwa\nGdańsk"
+                android:textSize="24sp" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/distanceLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Odległość to \n123km"
+            android:textSize="32sp"
             android:gravity="center"
-            android:text="DISTANCE FRAG"
-            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/station_two_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/station_one_container"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <LinearLayout
+            android:id="@+id/station_two_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/distanceLabel"
+            app:layout_constraintVertical_chainStyle="spread">
+
+            <ImageView
+                android:id="@+id/station_two_image"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/railway_train"
+                android:tint="@android:color/holo_blue_dark" />
+
+            <TextView
+                android:id="@+id/station_two_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Warszawa Zachodnia \n Warszawa"
+                android:gravity="center"
+                android:textSize="24sp" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
