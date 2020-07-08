@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_distance">
         <action
             android:id="@+id/action_distanceFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/slide_in_bottom"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -21,6 +22,10 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_distanceFragment"
-            app:destination="@id/distanceFragment" />
+            app:destination="@id/distanceFragment"
+            app:exitAnim="@anim/slide_in_top"
+            app:launchSingleTop="false"
+            app:popExitAnim="@anim/slide_in_top"
+            app:popUpTo="@+id/distanceFragment" />
     </fragment>
 </navigation>
