@@ -11,9 +11,9 @@ data class Station(
     @ColumnInfo(name = "name")
     val name : String,
     @ColumnInfo(name = "latitude")
-    val latitude : Float,
+    val latitude : Double,
     @ColumnInfo(name = "longitude")
-    val longitude : Float,
+    val longitude : Double,
     @ColumnInfo(name = "hits")
     val hits : Int,
     @ColumnInfo(name = "city")
