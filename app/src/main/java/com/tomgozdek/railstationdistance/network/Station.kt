@@ -9,9 +9,12 @@ data class Station(
     val name : String,
     @Json(name = "name_slug")
     val nameSlug : String,
-    val _latitude : Float?,
-    val _longitude : Float?,
+    @Json(name = "latitude")
+    val _latitude : Double?,
+    @Json(name = "longitude")
+    val _longitude : Double?,
     val hits : Int,
+    @Json(name = "ibnr")
     val _ibnr : Int?,
     val city : String,
     val region : String,
@@ -20,8 +23,8 @@ data class Station(
     @NullToEmptyString
     val localisedName : String = ""
 ){
-    val latitude = _latitude ?: 0F
-    val longitude = _longitude ?: 0F
+    val latitude = _latitude ?: 0.0
+    val longitude = _longitude ?: 0.0
     val ibnr = _ibnr ?: 0
 }
 
