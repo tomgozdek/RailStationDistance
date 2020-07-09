@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.tomgozdek.railstationdistance.distance.DistanceViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/startStationContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/distanceLabel"
+            app:layout_constraintEnd_toStartOf="@+id/destinationStationContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            android:onClick="@{()->viewModel.onStartStationSearchClick()}">
+
+            <ImageView
+                android:id="@+id/startImage"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:scaleX="-1"
+                android:src="@drawable/railway_train"
+                android:tint="@android:color/holo_blue_dark" />
+
+            <TextView
+                android:id="@+id/startLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.startStation}"
+                tools:text="Gdańsk Oliwa\nGdańsk"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/distanceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/distance_result_prompt, viewModel.distanceString)}"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:visibility="@{viewModel.distanceCalculated ? View.VISIBLE : View.INVISIBLE}"
+            tools:text="Odległość to 123km"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startStationContainer"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <LinearLayout
+            android:id="@+id/destinationStationContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/distanceLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/startStationContainer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            android:onClick="@{()->viewModel.onDestinationStationSearchClick()}">
+
+            <ImageView
+                android:id="@+id/destinationImage"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/railway_train"
+                android:tint="@android:color/holo_blue_dark" />
+
+            <TextView
+                android:id="@+id/destinationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.destinationStation}"
+                tools:text="Warszawa Zachodnia \n Warszawa"
+                android:gravity="center"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
