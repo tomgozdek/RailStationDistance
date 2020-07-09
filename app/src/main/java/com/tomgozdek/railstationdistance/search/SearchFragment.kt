@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.tomgozdek.railstationdistance.R
 import com.tomgozdek.railstationdistance.database.StationDatabase
 import com.tomgozdek.railstationdistance.databinding.FragmentSearchBinding
@@ -36,10 +33,10 @@ class SearchFragment : Fragment(){
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.button.setOnClickListener{
-            setFragmentResult(SEARCH_RESULT_KEY, bundleOf(STATION_ID to 802))
-            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDistanceFragment())
-        }
+//        binding.button.setOnClickListener{
+//            setFragmentResult(SEARCH_RESULT_KEY, bundleOf(STATION_ID to 802))
+//            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDistanceFragment())
+//        }
 
         return binding.root
     }
