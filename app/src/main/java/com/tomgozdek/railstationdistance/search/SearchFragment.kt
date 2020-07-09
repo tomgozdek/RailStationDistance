@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tomgozdek.railstationdistance.R
 import com.tomgozdek.railstationdistance.database.StationDatabase
@@ -33,10 +34,12 @@ class SearchFragment : Fragment(){
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-//        binding.button.setOnClickListener{
-//            setFragmentResult(SEARCH_RESULT_KEY, bundleOf(STATION_ID to 802))
-//            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDistanceFragment())
-//        }
+        val stationAdapter = StationAdapter()
+        binding.searchList.adapter = stationAdapter
+
+        viewModel.searchResult.observe(viewLifecycleOwner, Observer {stations ->
+            stationAdapter.submitList(stations)
+        })
 
         return binding.root
     }
