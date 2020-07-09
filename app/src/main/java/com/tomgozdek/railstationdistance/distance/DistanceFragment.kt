@@ -1,17 +1,21 @@
 package com.tomgozdek.railstationdistance.distance
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.tomgozdek.railstationdistance.R
 import com.tomgozdek.railstationdistance.database.StationDatabase
 import com.tomgozdek.railstationdistance.databinding.FragmentDistanceBinding
 import com.tomgozdek.railstationdistance.network.KoleoApi
 import com.tomgozdek.railstationdistance.repository.StationsRepository
+import com.tomgozdek.railstationdistance.search.SearchFragment
 
 class DistanceFragment : Fragment(){
 
@@ -43,6 +47,10 @@ class DistanceFragment : Fragment(){
         binding.startStationContainer.setOnClickListener(searchClickListener)
         binding.destinationStationContainer.setOnClickListener(searchClickListener)
 
+        setFragmentResultListener(SearchFragment.SEARCH_RESULT_KEY) { _, bundle ->
+            val result = bundle.getInt(SearchFragment.STATION_ID)
+            Log.d("DistanceFragment", " retrieved result - $result")
+        }
 
         return binding.root
     }

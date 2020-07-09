@@ -1,5 +1,6 @@
 package com.tomgozdek.railstationdistance.distance
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.tomgozdek.railstationdistance.repository.Repository
 import kotlinx.coroutines.CoroutineScope
@@ -22,5 +23,10 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
                 //TODO handle no network
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("ViewModel", "On Cleared")
     }
 }

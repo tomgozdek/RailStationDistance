@@ -26,6 +26,7 @@
             app:exitAnim="@anim/slide_in_top"
             app:launchSingleTop="false"
             app:popExitAnim="@anim/slide_in_top"
-            app:popUpTo="@+id/distanceFragment" />
+            app:popUpTo="@+id/distanceFragment">
+        </action>
     </fragment>
 </navigation>
