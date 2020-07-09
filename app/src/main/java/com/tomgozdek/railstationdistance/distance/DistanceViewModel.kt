@@ -16,13 +16,19 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
     val onSearchStationRequested : LiveData<Event<Unit>>
         get() = _onSearchStationRequested
 
-    private var startStation = MutableLiveData<Station>()
-    private var destinationStation = MutableLiveData<Station>()
+    private val _startStation = MutableLiveData<Station>()
+    val startStation : LiveData<Station>
+        get() = _startStation
+
+    private var _destinationStation = MutableLiveData<Station>()
+    val destinationStation : LiveData<Station>
+        get() = _destinationStation
+
     private var selectedStation = MutableLiveData<Station>()
 
     private val stationDistanceCalculator = MediatorLiveData<Float>().apply {
-        addSource(startStation,  Observer { calculateDistance(it, destinationStation.value) })
-        addSource(destinationStation, Observer { calculateDistance(startStation.value, it) })
+        addSource(_startStation,  Observer { calculateDistance(it, _destinationStation.value) })
+        addSource(_destinationStation, Observer { calculateDistance(_startStation.value, it) })
     }
 
     private fun calculateDistance(startStation: Station?, destinationStation: Station?){
@@ -57,12 +63,12 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
 
     fun onStartStationSearchClick() {
         _onSearchStationRequested.value = Event(Unit)
-        selectedStation = startStation
+        selectedStation = _startStation
     }
 
     fun onDestinationStationSearchClick() {
         _onSearchStationRequested.value = Event(Unit)
-        selectedStation = destinationStation
+        selectedStation = _destinationStation
     }
 
     fun onSearchResult(stationId : Int){

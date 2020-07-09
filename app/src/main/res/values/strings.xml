@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">RailStationDistance</string>
     <string name="distance_result_prompt">Odległość to %s km</string>
+    <string name="add_station_prompt">Wybierz stację</string>
+    <string name="station_label">%s\n%s</string>
 </resources>
