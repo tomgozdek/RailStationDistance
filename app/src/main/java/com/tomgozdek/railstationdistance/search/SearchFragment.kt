@@ -8,9 +8,13 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tomgozdek.railstationdistance.R
+import com.tomgozdek.railstationdistance.database.StationDatabase
 import com.tomgozdek.railstationdistance.databinding.FragmentSearchBinding
+import com.tomgozdek.railstationdistance.network.KoleoApi
+import com.tomgozdek.railstationdistance.repository.StationsRepository
 
 class SearchFragment : Fragment(){
 
@@ -25,6 +29,12 @@ class SearchFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val binding : FragmentSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        val viewModelFactory = SearchViewModelFactory(StationsRepository(StationDatabase.getInstance(requireContext()), KoleoApi))
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
+
+        binding.viewModel = viewModel
+
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.button.setOnClickListener{
             setFragmentResult(SEARCH_RESULT_KEY, bundleOf(STATION_ID to 802))
