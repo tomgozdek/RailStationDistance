@@ -1,6 +1,6 @@
 package com.tomgozdek.railstationdistance.repository
 
-import android.util.Log
+import com.tomgozdek.railstationdistance.database.Station
 import com.tomgozdek.railstationdistance.database.StationDatabase
 import com.tomgozdek.railstationdistance.network.KoleoApi
 import com.tomgozdek.railstationdistance.network.toDatabaseModel
@@ -14,11 +14,12 @@ class StationsRepository(private val database: StationDatabase, private val kole
             database.stationDao().insertAll(stations.toDatabaseModel())
             val stationKeywords = koleaoApi.service.getStationKeywords()
             database.stationKeywordDao().insertAll(stationKeywords.toDatabaseModel())
-            Log.d("StatonRepository", "ReloadData fetch stations size ${stations.size} + keywords size ${stationKeywords.size}")
         }
     }
 
     override fun getStationKeywords() {
         database.stationKeywordDao().getAll()
     }
+
+    override suspend fun getStation(id: Int): Station = database.stationDao().findById(id)
 }

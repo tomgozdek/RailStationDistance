@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
@@ -22,7 +23,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread">
+            app:layout_constraintVertical_chainStyle="spread"
+            android:onClick="@{()->viewModel.onStartStationSearchClick()}">
 
             <ImageView
                 android:id="@+id/startImage"
@@ -45,9 +47,10 @@
             android:id="@+id/distanceLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Odległość to \n123km"
+            android:text="@{String.format(@string/distance_result_prompt, viewModel.distanceString)}"
             android:textSize="32sp"
             android:gravity="center"
+            tools:text="Odległość to 123km"
             app:layout_constraintBottom_toTopOf="@+id/destinationStationContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +67,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/distanceLabel"
-            app:layout_constraintVertical_chainStyle="spread">
+            app:layout_constraintVertical_chainStyle="spread"
+            android:onClick="@{()->viewModel.onDestinationStationSearchClick()}">
 
             <ImageView
                 android:id="@+id/destinationImage"

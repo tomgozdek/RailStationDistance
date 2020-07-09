@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RailStationDistance</string>
+    <string name="distance_result_prompt">Odległość to %s km</string>
 </resources>
