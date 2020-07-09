@@ -40,6 +40,10 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
         it.div(1000).toString()
     }
 
+    val distanceCalculated = Transformations.map(stationDistanceCalculator){
+        it != null
+    }
+
     init {
         viewModelScope.launch {
             try {
