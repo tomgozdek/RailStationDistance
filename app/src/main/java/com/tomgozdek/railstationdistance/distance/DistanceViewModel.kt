@@ -43,7 +43,7 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
     }
 
     val distanceString = Transformations.map(stationDistanceCalculator){
-        it.div(1000).toString()
+        "%.2f".format(it.div(1000))
     }
 
     val distanceCalculated = Transformations.map(stationDistanceCalculator){
