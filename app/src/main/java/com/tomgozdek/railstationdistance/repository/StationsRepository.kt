@@ -7,7 +7,9 @@ import com.tomgozdek.railstationdistance.network.toDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class StationsRepository(private val database: StationDatabase, private val koleaoApi : KoleoApi) : Repository{
+class StationsRepository(
+    private val database: StationDatabase,
+    private val koleaoApi: KoleoApi) : Repository {
     override suspend fun reloadData(){
         withContext(Dispatchers.IO){
             val stations = koleaoApi.service.getStations()
@@ -17,9 +19,12 @@ class StationsRepository(private val database: StationDatabase, private val kole
         }
     }
 
-    override fun getStationKeywords() {
+    override suspend fun getStationKeywords() {
         database.stationKeywordDao().getAll()
     }
 
     override suspend fun getStation(id: Int): Station = database.stationDao().findById(id)
+
+    override suspend fun findMatchinStations(pattern: String): List<Station> =
+        database.stationDao().findMatchingStations(pattern)
 }

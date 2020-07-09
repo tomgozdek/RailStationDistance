@@ -7,5 +7,7 @@ interface Repository {
 
     suspend fun getStation(id : Int) : Station
 
-    fun getStationKeywords()
+    suspend fun getStationKeywords()
+
+    suspend fun findMatchinStations(pattern : String) : List<Station>
 }
