@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tomgozdek.railstationdistance.database.Station
 import com.tomgozdek.railstationdistance.databinding.SearchListItemBinding
 
-class StationAdapter : ListAdapter<Station, StationAdapter.ViewHolder>(StationDiffCallback()){
+class StationAdapter(private val clickListener: StationClickListener) : ListAdapter<Station, StationAdapter.ViewHolder>(StationDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -16,12 +16,13 @@ class StationAdapter : ListAdapter<Station, StationAdapter.ViewHolder>(StationDi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val station = getItem(position)
-        holder.bind(station)
+        holder.bind(station, clickListener)
     }
 
     class ViewHolder private constructor(val binding: SearchListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(station: Station) {
+        fun bind(station: Station, clickListener: StationClickListener) {
             binding.station = station
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
