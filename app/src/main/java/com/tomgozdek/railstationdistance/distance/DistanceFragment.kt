@@ -38,7 +38,7 @@ class DistanceFragment : Fragment(){
         })
 
         setFragmentResultListener(SearchFragment.SEARCH_RESULT_KEY) { _, bundle ->
-            val result = bundle.getInt(SearchFragment.STATION_ID)
+            val result = bundle.getLong(SearchFragment.STATION_ID)
             viewModel.onSearchResult(result)
         }
 

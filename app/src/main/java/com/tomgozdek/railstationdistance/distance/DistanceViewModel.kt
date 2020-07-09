@@ -71,17 +71,17 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
         selectedStation = _destinationStation
     }
 
-    fun onSearchResult(stationId : Int){
+    fun onSearchResult(stationId : Long){
         setStation(stationId)
     }
 
-    private fun setStation(stationId: Int){
+    private fun setStation(stationId: Long){
         viewModelScope.launch {
             selectedStation.value = getStation(stationId)
         }
     }
 
-    private suspend fun getStation(stationId: Int) : Station{
+    private suspend fun getStation(stationId: Long) : Station{
         return withContext(Dispatchers.IO){
             repository.getStation(stationId)
         }

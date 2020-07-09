@@ -23,7 +23,7 @@ class StationsRepository(
         database.stationKeywordDao().getAll()
     }
 
-    override suspend fun getStation(id: Int): Station = database.stationDao().findById(id)
+    override suspend fun getStation(id: Long): Station = database.stationDao().findById(id)
 
     override suspend fun findMatchinStations(pattern: String): List<Station> =
         database.stationDao().findMatchingStations(pattern)

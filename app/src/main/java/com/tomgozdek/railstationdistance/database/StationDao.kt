@@ -11,7 +11,7 @@ interface StationDao {
     fun insertAll(stations : List<Station>)
 
     @Query("SELECT * FROM stations_table WHERE id LIKE :stationId")
-    fun findById(stationId : Int) : Station
+    fun findById(stationId : Long) : Station
 
     @Query("SELECT * FROM stations_table WHERE name LIKE :pattern ORDER BY hits DESC LIMIT 10")
     fun findMatchingStations(pattern : String) : List<Station>

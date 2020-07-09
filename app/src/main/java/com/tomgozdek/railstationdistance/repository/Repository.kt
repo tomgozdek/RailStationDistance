@@ -5,7 +5,7 @@ import com.tomgozdek.railstationdistance.database.Station
 interface Repository {
     suspend fun reloadData()
 
-    suspend fun getStation(id : Int) : Station
+    suspend fun getStation(id : Long) : Station
 
     suspend fun getStationKeywords()
 
