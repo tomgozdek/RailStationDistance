@@ -83,4 +83,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     // Workmanager
     androidTestImplementation "androidx.work:work-testing:$work_version"
+
+    //Navigation
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 }
