@@ -4,4 +4,5 @@
     <string name="add_station_prompt">Wybierz stację</string>
     <string name="station_label">%s\n%s</string>
     <string name="station_search_input_hint">Podaj nazwę stacji</string>
+    <string name="station_not_found_prompt">Brak wyników</string>
 </resources>

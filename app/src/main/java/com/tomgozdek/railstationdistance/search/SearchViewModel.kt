@@ -21,10 +21,12 @@ class SearchViewModel(private val repository: Repository) : ViewModel(){
     fun onSearchInputChange(sequence: CharSequence, start : Int, before : Int, count : Int){
         _searchInput.value = sequence.toString()
 
-        if(sequence.toString().length > 2){
+        if(sequence.toString().length >= 2){
             viewModelScope.launch {
                 _searchResult.value = searchStations(sequence.toString())
             }
+        } else {
+            _searchResult.value = emptyList()
         }
     }
 
