@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tomgozdek.railstationdistance.database.Station
 import com.tomgozdek.railstationdistance.repository.Repository
+import com.tomgozdek.railstationdistance.util.Event
 import kotlinx.coroutines.*
+import java.io.IOException
 
 class SearchViewModel(private val repository: Repository) : ViewModel(){
 
@@ -13,6 +15,25 @@ class SearchViewModel(private val repository: Repository) : ViewModel(){
 
     private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    init {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    repository.reloadData()
+                } catch (exception : IOException){
+                    val stations = repository.getAllStations()
+                    if(stations.isEmpty()){
+                        _databaseEmptyEvent.postValue(Event(Unit))
+                    }
+                }
+            }
+        }
+    }
+
+    private val _databaseEmptyEvent = MutableLiveData<Event<Unit>>()
+    val databaseEmptyEvent : LiveData<Event<Unit>>
+        get() = _databaseEmptyEvent
 
     private val _searchResult = MutableLiveData<List<Station>>()
     val searchResult : LiveData<List<Station>>

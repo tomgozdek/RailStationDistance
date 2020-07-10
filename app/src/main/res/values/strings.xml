@@ -5,4 +5,7 @@
     <string name="station_label">%s\n%s</string>
     <string name="station_search_input_hint">Podaj nazwę stacji</string>
     <string name="station_not_found_prompt">Brak wyników</string>
+    <string name="offline_dlg_msg">Aby aplikacja działała w trybie offline należy wcześniej pobrać bazę stacji. Włącz dostęp do sieci a następnie spróbuj ponownie.</string>
+    <string name="offline_dlg_title">Tryb offline</string>
+    <string name="btn_ok">OK</string>
 </resources>

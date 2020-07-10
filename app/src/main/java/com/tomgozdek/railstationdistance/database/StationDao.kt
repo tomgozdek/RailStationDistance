@@ -15,4 +15,7 @@ interface StationDao {
 
     @Query("SELECT * FROM stations_table WHERE name LIKE :pattern ORDER BY hits DESC LIMIT 10")
     fun findMatchingStations(pattern : String) : List<Station>
+
+    @Query("SELECT * FROM stations_table")
+    fun getAll() : List<Station>
 }

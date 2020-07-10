@@ -5,7 +5,6 @@ import com.tomgozdek.railstationdistance.database.Station
 import com.tomgozdek.railstationdistance.repository.Repository
 import com.tomgozdek.railstationdistance.util.Event
 import kotlinx.coroutines.*
-import java.io.IOException
 
 class DistanceViewModel(private val repository : Repository) : ViewModel(){
 
@@ -27,8 +26,8 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
     private var selectedStation = MutableLiveData<Station>()
 
     private val stationDistanceCalculator = MediatorLiveData<Float>().apply {
-        addSource(_startStation,  Observer { calculateDistance(it, _destinationStation.value) })
-        addSource(_destinationStation, Observer { calculateDistance(_startStation.value, it) })
+        addSource(_startStation) { calculateDistance(it, _destinationStation.value) }
+        addSource(_destinationStation) { calculateDistance(_startStation.value, it) }
     }
 
     private fun calculateDistance(startStation: Station?, destinationStation: Station?){
@@ -49,17 +48,6 @@ class DistanceViewModel(private val repository : Repository) : ViewModel(){
     val distanceCalculated = Transformations.map(stationDistanceCalculator){
         it != null
     }
-
-    init {
-        viewModelScope.launch {
-            try {
-                repository.reloadData()
-            } catch (exception : IOException){
-                //TODO handle no network
-            }
-        }
-    }
-
 
     fun onStartStationSearchClick() {
         _onSearchStationRequested.value = Event(Unit)

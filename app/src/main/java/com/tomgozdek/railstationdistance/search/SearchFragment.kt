@@ -1,5 +1,7 @@
 package com.tomgozdek.railstationdistance.search
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.tomgozdek.railstationdistance.database.StationDatabase
 import com.tomgozdek.railstationdistance.databinding.FragmentSearchBinding
 import com.tomgozdek.railstationdistance.network.KoleoApi
 import com.tomgozdek.railstationdistance.repository.StationsRepository
+import com.tomgozdek.railstationdistance.util.EventObserver
 
 class SearchFragment : Fragment(){
 
@@ -48,7 +51,21 @@ class SearchFragment : Fragment(){
             stationAdapter.submitList(stations)
         })
 
+        viewModel.databaseEmptyEvent.observe(viewLifecycleOwner, EventObserver {
+            showDatabaseEmptyDialog()
+        })
+
         return binding.root
+    }
+
+    private fun showDatabaseEmptyDialog() {
+        val dialog = AlertDialog.Builder(requireActivity())
+                                .setMessage(R.string.offline_dlg_msg)
+                                .setTitle(R.string.offline_dlg_title)
+            .setPositiveButton(R.string.btn_ok) {_, _ ->
+                findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDistanceFragment())
+            }.create()
+        dialog.show()
     }
 
 }

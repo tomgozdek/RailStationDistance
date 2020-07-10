@@ -11,12 +11,10 @@ class StationsRepository(
     private val database: StationDatabase,
     private val koleaoApi: KoleoApi) : Repository {
     override suspend fun reloadData(){
-        withContext(Dispatchers.IO){
-            val stations = koleaoApi.service.getStations()
-            database.stationDao().insertAll(stations.toDatabaseModel())
-            val stationKeywords = koleaoApi.service.getStationKeywords()
-            database.stationKeywordDao().insertAll(stationKeywords.toDatabaseModel())
-        }
+        val stations = koleaoApi.service.getStations()
+        database.stationDao().insertAll(stations.toDatabaseModel())
+        val stationKeywords = koleaoApi.service.getStationKeywords()
+        database.stationKeywordDao().insertAll(stationKeywords.toDatabaseModel())
     }
 
     override suspend fun getStationKeywords() {
@@ -27,4 +25,6 @@ class StationsRepository(
 
     override suspend fun findMatchinStations(pattern: String): List<Station> =
         database.stationDao().findMatchingStations(pattern)
+
+    override suspend fun getAllStations(): List<Station> = database.stationDao().getAll()
 }
